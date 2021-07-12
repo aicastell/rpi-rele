@@ -9,7 +9,6 @@
 ### END INIT INFO
 
 RETVAL=0
-PATH=$PATH=/usr/local/bin
 
 start()
 {
