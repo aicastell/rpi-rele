@@ -1,0 +1,43 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: rigctl
+# Required-Start:    $all
+# Required-Stop: 
+# Default-Start:     5 
+# Default-Stop:      6 
+# Short-Description: Rig controller controls and monitorize rig
+### END INIT INFO
+
+RETVAL=0
+PATH=$PATH=/usr/local/bin
+
+start()
+{
+    echo "starting"
+    nohup rig-monit.sh > /dev/null 2>&1 < /dev/null &
+}
+
+stop()
+{
+    echo "stopping"
+    killall rig-monit.sh
+}
+
+case "$1" in
+start)
+    start
+    ;;
+stop)
+    stop
+    ;;
+restart)
+    stop
+    start
+    ;;
+*)
+    echo $"Usage: $prog {start|stop|restart}"
+    exit 1
+esac
+
+exit $RETVAL
+
