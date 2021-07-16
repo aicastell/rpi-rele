@@ -1,7 +1,5 @@
 #! /bin/bash
 
-source /etc/rpi-rele.conf
-
 export_gpio_dir()
 {
     GPIO_NR=$1
@@ -10,7 +8,7 @@ export_gpio_dir()
     then
         echo $GPIO_NR > /sys/class/gpio/export
         echo $GPIO_DIR > /sys/class/gpio/gpio${GPIO_NR}/direction
-    fi
+    fi  
 }
 
 off_gpio()
@@ -24,16 +22,4 @@ on_gpio()
     GPIO_NR=$1
     echo 0 > /sys/class/gpio/gpio${GPIO_NR}/value
 }
-
-# Export some GPIOS and set direction
-export_gpio_dir $GPIO_PWR1 out
-
-# Deactivate all
-off_gpio $GPIO_PWR1
-
-# Poweron
-on_gpio $GPIO_PWR1
-sleep 1
-off_gpio $GPIO_PWR1
-
 
