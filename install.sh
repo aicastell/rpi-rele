@@ -18,15 +18,19 @@ check_apt_depends()
 
 ##### MAIN
 
-echo "Checking apt dependencies"
+echo "Checking and install APT depends"
 check_apt_depends
 
-echo "Installing rpi-rele software"
+echo "Install rpi-rele software"
 sudo cp -Rfa src/* /
 
 echo "Settings permissions"
 sudo chmod +x /usr/bin/poweron.sh
 sudo chmod +x /usr/bin/reset.sh
 sudo chmod +x /usr/bin/rig-monit.sh
+sudo chmod +x /etc/init.d/rigctl
+
+echo "Add init service"
+update-rc.d rigctl defaults
 
 echo "Done"

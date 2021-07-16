@@ -12,14 +12,16 @@ RETVAL=0
 
 start()
 {
-    echo "starting"
+    echo "Starting rigctl service..."
     nohup rig-monit.sh > /dev/null 2>&1 < /dev/null &
+    echo "Started"
 }
 
 stop()
 {
-    echo "stopping"
+    echo "Stopping rigctl service..."
     killall rig-monit.sh
+    echo "Stopped"
 }
 
 case "$1" in
