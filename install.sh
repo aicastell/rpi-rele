@@ -25,9 +25,9 @@ echo "Install rpi-rele software"
 sudo cp -Rfa src/* /
 
 echo "Settings permissions"
-sudo chmod +x /usr/bin/poweron.sh
-sudo chmod +x /usr/bin/reset.sh
-sudo chmod +x /usr/bin/rig-monit.sh
+sudo chmod +x /usr/bin/poweron-chan*.sh
+sudo chmod +x /usr/bin/reset-chan*.sh
+sudo chmod +x /usr/bin/rig-monit-chan*.sh
 sudo chmod +x /etc/init.d/rigctl
 
 echo "Add init service"

@@ -8,19 +8,49 @@
 # Short-Description: Rig controller controls and monitorize rig
 ### END INIT INFO
 
+source etc/rpi-rele.conf
+
 RETVAL=0
 
 start()
 {
     echo "Starting rigctl service..."
-    nohup rig-monit.sh > /dev/null 2>&1 < /dev/null &
+    if [[ $GPIO_PWR1 ]]; then
+        nohup rig-monit-chan1.sh > /dev/null 2>&1 < /dev/null &
+    fi
+
+    if [ $GPIO_PWR2 ]; then
+        nohup rig-monit-chan2.sh > /dev/null 2>&1 < /dev/null &
+    fi
+
+    if [ $GPIO_PWR3 ]; then
+        nohup rig-monit-chan3.sh > /dev/null 2>&1 < /dev/null &
+    fi
+
+    if [ $GPIO_PWR4 ]; then
+        nohup rig-monit-chan4.sh > /dev/null 2>&1 < /dev/null &
+    fi
     echo "Started"
 }
 
 stop()
 {
     echo "Stopping rigctl service..."
-    killall rig-monit.sh
+    if [[ $GPIO_RST1 ]]; then
+        killall rig-monit-chan1.sh
+    fi
+
+    if [[ $GPIO_RST1 ]]; then
+        killall rig-monit-chan2.sh
+    fi
+
+    if [[ $GPIO_RST1 ]]; then
+        killall rig-monit-chan3.sh
+    fi
+
+    if [[ $GPIO_RST1 ]]; then
+        killall rig-monit-chan4.sh
+    fi
     echo "Stopped"
 }
 
