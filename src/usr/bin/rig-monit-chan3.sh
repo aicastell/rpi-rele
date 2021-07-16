@@ -26,7 +26,7 @@ error_state()
         fi
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
-            poweron.sh
+            poweron-chan3.sh
             break
         fi
     done
