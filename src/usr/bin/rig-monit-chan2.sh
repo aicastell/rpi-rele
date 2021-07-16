@@ -6,7 +6,7 @@ TIMEOUT=$(expr ${INTERVAL_SECS} / ${FAILS_TOTAL})
 
 check_ping()
 {
-    ping -c 1 $MONIT_IP1
+    ping -c 1 $MONIT_IP2
     return $?
 }	
 	
