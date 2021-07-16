@@ -8,7 +8,7 @@
 # Short-Description: Rig controller controls and monitorize rig
 ### END INIT INFO
 
-source etc/rpi-rele.conf
+source /etc/rpi-rele.conf
 
 RETVAL=0
 
