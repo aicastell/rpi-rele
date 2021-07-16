@@ -40,15 +40,15 @@ stop()
         killall rig-monit-chan1.sh
     fi
 
-    if [[ $GPIO_RST1 ]]; then
+    if [[ $GPIO_RST2 ]]; then
         killall rig-monit-chan2.sh
     fi
 
-    if [[ $GPIO_RST1 ]]; then
+    if [[ $GPIO_RST3 ]]; then
         killall rig-monit-chan3.sh
     fi
 
-    if [[ $GPIO_RST1 ]]; then
+    if [[ $GPIO_RST4 ]]; then
         killall rig-monit-chan4.sh
     fi
     echo "Stopped"
