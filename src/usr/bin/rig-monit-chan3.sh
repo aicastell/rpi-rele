@@ -26,7 +26,7 @@ error_state()
         fi
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
-            /root/poweron.sh
+            poweron.sh
             break
         fi
     done
