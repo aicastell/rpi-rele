@@ -22,13 +22,19 @@ echo "Checking and install APT depends"
 check_apt_depends
 
 echo "Install rpi-rele software"
-sudo cp -Rfa src/* /
+sudo cp -Rfa src/usr/bin/* /usr/bin/
+sudo cp -Rfa src/etc/init.d/* /etc/init.d/
+sudo cp -Rfa src/etc/network/interfaces.d/* /etc/network/interfaces.d/
+if [ ! -f /etc/rpi-rele.conf ]; then
+    sudo cp src/etc/rpi-rele.conf /etc/
+fi
 
 echo "Settings permissions"
-sudo chmod +x /usr/bin/poweron-chan*.sh
-sudo chmod +x /usr/bin/reset-chan*.sh
-sudo chmod +x /usr/bin/rig-monit-chan*.sh
-sudo chmod +x /etc/init.d/rigctl
+sudo chmod 755 /usr/bin/poweron-chan*.sh
+sudo chmod 755 /usr/bin/reset-chan*.sh
+sudo chmod 755 /usr/bin/rig-monit-chan*.sh
+sudo chmod 755 /etc/init.d/rigctl
+sudo chmod 644 /etc/rpi-rele.conf
 
 echo "Add init service"
 update-rc.d rigctl defaults
