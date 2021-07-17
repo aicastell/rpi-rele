@@ -24,7 +24,9 @@ check_apt_depends
 echo "Install rpi-rele software"
 sudo cp -Rfa src/usr/bin/* /usr/bin/
 sudo cp -Rfa src/etc/init.d/* /etc/init.d/
-sudo cp -Rfa src/etc/network/interfaces.d/* /etc/network/interfaces.d/
+if [ ! -f /etc/network/interfaces.d/eth0 ]; then
+    sudo cp -Rfa src/etc/network/interfaces.d/eth0 /etc/network/interfaces.d/
+fi
 if [ ! -f /etc/rpi-rele.conf ]; then
     sudo cp src/etc/rpi-rele.conf /etc/
 fi
