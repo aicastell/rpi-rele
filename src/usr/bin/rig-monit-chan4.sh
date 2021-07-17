@@ -27,8 +27,8 @@ error_state()
         fi
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
-            poweron-chan4.sh
-            reset-chan4.sh
+            poweron-chan.sh $GPIO_PWR4
+            reset-chan.sh $GPIO_RST4
             break
         fi
     done
