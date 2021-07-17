@@ -27,8 +27,13 @@ error_state()
         fi
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
-            poweron-chan.sh $GPIO_PWR1
-            reset-chan.sh $GPIO_RST1
+            if [[ $GPIO_PWR1 ]]; then
+                poweron-chan.sh $GPIO_PWR1
+            else
+                if [[ $GPIO_RST1 ]]; then
+                    reset-chan.sh $GPIO_RST1
+                fi
+            fi
             break
         fi
     done
