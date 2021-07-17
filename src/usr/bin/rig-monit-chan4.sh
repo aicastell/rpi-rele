@@ -6,7 +6,8 @@ TIMEOUT=$(expr ${INTERVAL_SECS} / ${FAILS_TOTAL})
 
 check_ping()
 {
-    ping -c 1 $MONIT_IP4
+    MONIT_IP=$1
+    ping -c 1 $MONIT_IP
     return $?
 }	
 	
@@ -27,6 +28,7 @@ error_state()
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
             poweron-chan4.sh
+            reset-chan4.sh
             break
         fi
     done
@@ -34,7 +36,7 @@ error_state()
 
 while [ 1 ]
 do
-    check_ping
+    check_ping $MONIT_IP4
     RET=$?
 
     if [ $RET -ne 0 ]; then
