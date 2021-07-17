@@ -21,19 +21,19 @@ start()
 {
     echo "Starting rigctl service..."
     if [[ $CHAN1_GPIO ]]; then
-        start-stop-daemon --start -b --pidfile $PIDFILE_CHAN1 --exec  /usr/bin/rig-monit-chan1.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN1 --exec /usr/bin/rig-monit-chan1.sh
     fi
 
     if [[ $CHAN2_GPIO ]]; then
-        start-stop-daemon --start -b --pidfile $PIDFILE_CHAN2 --exec  /usr/bin/rig-monit-chan2.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN2 --exec /usr/bin/rig-monit-chan2.sh
     fi
 
     if [[ $CHAN3_GPIO ]]; then
-        start-stop-daemon --start -b --pidfile $PIDFILE_CHAN3 --exec  /usr/bin/rig-monit-chan3.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN3 --exec /usr/bin/rig-monit-chan3.sh
     fi
 
     if [[ $CHAN4_GPIO ]]; then
-        start-stop-daemon --start -b --pidfile $PIDFILE_CHAN4 --exec  /usr/bin/rig-monit-chan4.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN4 --exec /usr/bin/rig-monit-chan4.sh
     fi
     echo "Started"
 }
