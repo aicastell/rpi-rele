@@ -20,19 +20,19 @@ PIDFILE_CHAN4=/var/run/chan4.pid
 start()
 {
     echo "Starting rigctl service..."
-    if [[ $GPIO_PWR1 ]]; then
+    if [[ $GPIO_PWR1 ]] || [[ $GPIO_RST1 ]]; then
         start-stop-daemon --start -b --pidfile $PIDFILE_CHAN1 --exec  /usr/bin/rig-monit-chan1.sh
     fi
 
-    if [ $GPIO_PWR2 ]; then
+    if [[ $GPIO_PWR2 ]] || [[ $GPIO_RST2 ]]; then
         start-stop-daemon --start -b --pidfile $PIDFILE_CHAN2 --exec  /usr/bin/rig-monit-chan2.sh
     fi
 
-    if [ $GPIO_PWR3 ]; then
+    if [[ $GPIO_PWR3 ]] || [[ $GPIO_RST3 ]]; then
         start-stop-daemon --start -b --pidfile $PIDFILE_CHAN3 --exec  /usr/bin/rig-monit-chan3.sh
     fi
 
-    if [ $GPIO_PWR4 ]; then
+    if [[ $GPIO_PWR4 ]] || [[ $GPIO_RST4 ]]; then
         start-stop-daemon --start -b --pidfile $PIDFILE_CHAN4 --exec  /usr/bin/rig-monit-chan4.sh
     fi
     echo "Started"
@@ -41,19 +41,19 @@ start()
 stop()
 {
     echo "Stopping rigctl service..."
-    if [[ $GPIO_RST1 ]]; then
+    if [[ $GPIO_RST1 ]] || [[ $GPIO_RST1 ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN1
     fi
 
-    if [[ $GPIO_RST2 ]]; then
+    if [[ $GPIO_RST2 ]] || [[ $GPIO_RST2 ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN2
     fi
 
-    if [[ $GPIO_RST3 ]]; then
+    if [[ $GPIO_RST3 ]] || [[ $GPIO_RST3 ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN3
     fi
 
-    if [[ $GPIO_RST4 ]]; then
+    if [[ $GPIO_RST4 ]] || [[ $GPIO_RST4 ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN4
     fi
     echo "Stopped"
