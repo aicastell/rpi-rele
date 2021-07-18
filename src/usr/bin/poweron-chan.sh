@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ $# -ne 1 ]; then
+    echo "Syntax error: gpio expected"
+    exit
+fi
+
 GPIO_PWR=$1
 
 source /etc/rpi-rele.conf
@@ -15,5 +20,4 @@ off_gpio $GPIO_PWR
 on_gpio $GPIO_PWR
 sleep 1
 off_gpio $GPIO_PWR
-
 
