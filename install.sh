@@ -32,8 +32,7 @@ if [ ! -f /etc/rpi-rele.conf ]; then
 fi
 
 echo "Settings permissions"
-sudo chmod 755 /usr/bin/poweron-chan.sh
-sudo chmod 755 /usr/bin/reset-chan.sh
+sudo chmod 755 /usr/bin/activate-1sec.sh
 sudo chmod 755 /usr/bin/rig-monit-chan*.sh
 sudo chmod 755 /etc/init.d/rigctl
 sudo chmod 644 /etc/rpi-rele.conf

@@ -1,6 +1,6 @@
 # RELE CONTROLLER
 
-Software is used to control the PWR and RST signals of a mining rig.
+Software used to control the PWR and RST signals of a mining rig.
 
 ## Configuration
 
@@ -8,7 +8,7 @@ Edit /etc/rpi-rele.conf file and enable the channels you need. For each channel
 you must setup:
 
 a) The GPIO number connected
-b) The function reset (RST) or poweron (PWR)
+b) The function reset (RST) or power (PWR)
 c) The IP address monitorized
 d) The time to be monitorizing
 e) The number of ping fails in that time
