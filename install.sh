@@ -1,10 +1,11 @@
 #! /bin/bash
 
-APT_DEPENDS="git vim htop"
+APT_DEPENDS="git vim htop mosquitto mosquitto-clients"
+APT_RM_DEPENDS="dhcpcd5 isc-dhcp-client isc-dhcp-common"
 
 check_apt_depends()
 {
-    echo "Checking package dependencies..."
+    echo "Checking package dependencies to add..."
     for DEPEND in ${APT_DEPENDS}
     do  
         dpkg -s ${DEPEND} &> /dev/null 2>&1
@@ -16,10 +17,32 @@ check_apt_depends()
     done
 }
 
+check_apt_rm_depends()
+{
+    echo "Checking package dependencies to remove..."
+    for DEPEND in ${APT_RM_DEPENDS}
+    do  
+        dpkg -s ${DEPEND} &> /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo "Package depend ${DEPEND} is installed" &> /dev/null 2>&1
+        else
+            sudo apt remove ${DEPEND}
+        fi
+    done
+}
+
+
 ##### MAIN
+
+echo "Initial customizations"
+raspi-config nonint do_change_locale es_ES.UTF-8
+raspi-config nonint do_wifi_country ES
+raspi-config nonint do_configure_keyboard es
+systemctl enable ssh.service
 
 echo "Checking and install APT depends"
 check_apt_depends
+check_apt_rm_depends
 
 echo "Install rpi-rele software"
 sudo cp -Rfa src/usr/bin/* /usr/bin/
@@ -33,11 +56,13 @@ fi
 
 echo "Settings permissions"
 sudo chmod 755 /usr/bin/activate-1sec.sh
-sudo chmod 755 /usr/bin/rig-monit-chan*.sh
-sudo chmod 755 /etc/init.d/rigctl
+sudo chmod 755 /usr/bin/rig-ping-chan*.sh
+sudo chmod 755 /usr/bin/rig-listen-chan*.sh
+sudo chmod 755 /etc/init.d/rigpingctl
 sudo chmod 644 /etc/rpi-rele.conf
 
 echo "Add init service"
-update-rc.d rigctl defaults
+update-rc.d rigpingctl defaults
+update-rc.d riglistenctl defaults
 
 echo "Done"

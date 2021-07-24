@@ -1,6 +1,6 @@
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provides: rigctl
+# Provides: rigpingctl
 # Required-Start:    $all
 # Required-Stop: 
 # Default-Start:     5 
@@ -12,35 +12,35 @@ source /etc/rpi-rele.conf
 
 RETVAL=0
 
-PIDFILE_CHAN1=/var/run/chan1.pid
-PIDFILE_CHAN2=/var/run/chan2.pid
-PIDFILE_CHAN3=/var/run/chan3.pid
-PIDFILE_CHAN4=/var/run/chan4.pid
+PIDFILE_CHAN1=/var/run/riglisten1.pid
+PIDFILE_CHAN2=/var/run/riglisten2.pid
+PIDFILE_CHAN3=/var/run/riglisten3.pid
+PIDFILE_CHAN4=/var/run/riglisten4.pid
 
 start()
 {
-    echo "Starting rigctl service..."
+    echo "Starting riglistenctl service..."
     if [[ $CHAN1_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN1 --exec /usr/bin/rig-monit-chan1.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN1 --exec /usr/bin/rig-listen-chan1.sh
     fi
 
     if [[ $CHAN2_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN2 --exec /usr/bin/rig-monit-chan2.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN2 --exec /usr/bin/rig-listen-chan2.sh
     fi
 
     if [[ $CHAN3_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN3 --exec /usr/bin/rig-monit-chan3.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN3 --exec /usr/bin/rig-listen-chan3.sh
     fi
 
     if [[ $CHAN4_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN4 --exec /usr/bin/rig-monit-chan4.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN4 --exec /usr/bin/rig-listen-chan4.sh
     fi
     echo "Started"
 }
 
 stop()
 {
-    echo "Stopping rigctl service..."
+    echo "Stopping riglistenctl service..."
     if [[ $CHAN1_GPIO ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN1
     fi
