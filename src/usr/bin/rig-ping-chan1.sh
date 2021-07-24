@@ -17,7 +17,7 @@ error_state()
     while [ 1 ]
     do
         sleep $TIMEOUT
-        check_ping $MONIT_IP1
+        check_ping $CHAN_IP1
         RET=$?
 
         if [ $RET -ne 0 ]; then
@@ -41,7 +41,7 @@ error_state()
 
 while [ 1 ]
 do
-    check_ping $MONIT_IP1
+    check_ping $CHAN_IP1
     RET=$?
 
     if [ $RET -ne 0 ]; then
