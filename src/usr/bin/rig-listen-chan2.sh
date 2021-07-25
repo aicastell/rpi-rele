@@ -1,5 +1,6 @@
 #! /bin/bash
 
+source /etc/rpi-rele.conf
 while [ 1 ]
 do
     TIME_INI=$(date +%s)
