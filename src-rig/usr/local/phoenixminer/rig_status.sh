@@ -1,7 +1,10 @@
 #! /bin/bash
 
+# TODO Define RPI_IPADDR properly
+RPI_IPADDR=pi-rele
+
 HOSTNAME=$(cat /etc/hostname)
-IPADDR=$(hostname -I | cut -d" " -f 1)
+IPADDR=$(ip route get 1 | awk '{print $(NF-2);exit}')
 MAX_ERRORS=10
 TIMEOUT=60
 
@@ -38,6 +41,6 @@ do
         STATUS=2
     fi
 
-    mosquitto_pub -t "rpi/status/${HOSTNAME}" -h pi-rele -m "{ \"rigname\": \"${HOSTNAME}\", \"ipaddr\": \"${IPADDR}\", \"status\": ${STATUS} }"
+    mosquitto_pub -t "rpi/status/${HOSTNAME}" -h ${RPI_IPADDR} -m "{ \"rigname\": \"${HOSTNAME}\", \"ipaddr\": \"${IPADDR}\", \"status\": ${STATUS} }"
     sleep $TIMEOUT
 done

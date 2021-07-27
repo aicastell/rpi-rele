@@ -1,0 +1,17 @@
+[Unit]
+Description=Rig Status Service
+
+[Service]
+User=root
+Group=root
+GuessMainPID=no
+ExecStart=/usr/local/phoenixminer/rig_status.sh
+StandardOutput=null
+Restart=always
+RestartSec=30
+StartLimitInterval=200
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
+

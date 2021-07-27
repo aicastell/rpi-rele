@@ -1,6 +1,6 @@
 #! /bin/bash
 
-APT_DEPENDS="git vim htop mosquitto mosquitto-clients"
+APT_DEPENDS="git vim htop mosquitto mosquitto-clients jq"
 APT_RM_DEPENDS="dhcpcd5 isc-dhcp-client isc-dhcp-common"
 
 check_apt_depends()
@@ -45,13 +45,13 @@ check_apt_depends
 check_apt_rm_depends
 
 echo "Install rpi-rele software"
-sudo cp -Rfa src/usr/bin/* /usr/bin/
-sudo cp -Rfa src/etc/init.d/* /etc/init.d/
+sudo cp -Rfa src-rpi/usr/bin/* /usr/bin/
+sudo cp -Rfa src-rpi/etc/init.d/* /etc/init.d/
 if [ ! -f /etc/network/interfaces.d/eth0 ]; then
-    sudo cp -Rfa src/etc/network/interfaces.d/eth0 /etc/network/interfaces.d/
+    sudo cp -Rfa src-rpi/etc/network/interfaces.d/eth0 /etc/network/interfaces.d/
 fi
 if [ ! -f /etc/rpi-rele.conf ]; then
-    sudo cp src/etc/rpi-rele.conf /etc/
+    sudo cp src-rpi/etc/rpi-rele.conf /etc/
 fi
 
 echo "Settings permissions"
