@@ -10,7 +10,7 @@ TIMEOUT=60
 
 check_test1()
 {
-    ping -c 1 -W 10 8.8.8.8 
+    ping -c 1 -W 10 ${RPI_IPADDR}
     RET=$?
     return $RET
 }
