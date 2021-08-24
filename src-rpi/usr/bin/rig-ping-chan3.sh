@@ -29,9 +29,7 @@ error_state()
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
             if [[ $CHAN3_GPIO ]]; then
                 if [ $CHAN3_FUNC == "RST" ]; then
-                    activate-1sec.sh $CHAN3_GPIO
-                else
-                    activate-1sec.sh $CHAN3_GPIO
+                    reset-chan.sh $CHAN3_GPIO
                 fi
             fi
             break

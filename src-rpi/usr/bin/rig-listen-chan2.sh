@@ -10,7 +10,7 @@ do
     ELAPSED_TIME=$(($TIME_END - $TIME_INI))
 
     if [ $ELAPSED_TIME -ge 600 ]; then
-        reset-chan2.sh
+        reset-chan.sh $CHAN2_GPIO
         continue
     fi
 
@@ -19,7 +19,7 @@ do
     RIGNAME=$(echo $RSP | jq .rigname)
 
     if [ $STATUS -ne 0 ]; then
-        reset-chan2.sh
+        reset-chan.sh $CHAN2_GPIO
         continue
     fi
 done

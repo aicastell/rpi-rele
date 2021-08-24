@@ -1,18 +1,25 @@
 #! /bin/bash
 
-GPIO_RST=$1
+if [ $# -ne 1 ]; then
+    echo "Syntax error: gpio expected"
+    exit
+fi
+
+GPIO=$1
 
 source /etc/rpi-rele.conf
 source /usr/bin/gpio-lib.sh
 
-# Export some GPIOS and set direction
-export_gpio_dir $GPIO_RST out
+echo "[rpi-rig-ctl] RPI requests a reset of gpio $GPIO at $(date)" >> ${LOGFILE}
 
-# Deactivate all
-off_gpio $GPIO_RST
+# Export GPIO and set direction
+export_gpio_dir $GPIO out
 
-# RESET
-on_gpio $GPIO_RST
+# Deactivate
+off_gpio $GPIO
+
+# Activate for 1 second
+on_gpio $GPIO
 sleep 1
-off_gpio $GPIO_RST
+off_gpio $GPIO
 
