@@ -29,6 +29,7 @@ error_state()
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
             if [[ $CHAN2_GPIO ]]; then
                 if [ $CHAN2_FUNC == "RST" ]; then
+                    echo "[rpi-rig-ping-chan] RPI requests a reset because FAIL_NR = $FAIL_NR at $(date)" >> ${LOGFILE}
                     reset-chan.sh $CHAN2_GPIO
                 fi
             fi

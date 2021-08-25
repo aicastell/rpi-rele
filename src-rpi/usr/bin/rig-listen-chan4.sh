@@ -10,6 +10,7 @@ do
     ELAPSED_TIME=$(($TIME_END - $TIME_INI))
 
     if [ $ELAPSED_TIME -ge 600 ]; then
+        echo "[rpi-rig-listen-chan] RPI requests a reset because ELAPSE_TIME>600 at $(date)" >> ${LOGFILE}
         reset-chan.sh $CHAN4_GPIO
         continue
     fi
@@ -19,6 +20,7 @@ do
     RIGNAME=$(echo $RSP | jq .rigname)
 
     if [ $STATUS -ne 0 ]; then
+        echo "[rpi-rig-listen-chan] RPI requests a reset because STATUS ne 0 at $(date)" >> ${LOGFILE}
         reset-chan.sh $CHAN4_GPIO
         continue
     fi
