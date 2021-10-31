@@ -2,6 +2,23 @@
 
 source /etc/rpi-rele.conf
 
+if [ $# -ne 1 ]; then
+    echo "Missing channel number"
+    exit
+fi
+
+NUM=$1
+
+if [ $NUM -lt 1 ] || [ $NUM -gt 8 ]; then
+    echo "Invalid channel number. Valid range is [1-8]"
+    exit
+fi
+
+eval CHAN_GPIO="\$CHAN${NUM}_GPIO"
+eval CHAN_FUNC="\$CHAN${NUM}_FUNC"
+eval CHAN_IP="\$CHAN${NUM}_IP"
+eval CHAN_HOSTNAME="\$CHAN${NUM}_HOSTNAME"
+
 TIMEOUT=$(expr ${INTERVAL_SECS} / ${FAILS_TOTAL})
 
 check_ping()
@@ -17,7 +34,7 @@ error_state()
     while [ 1 ]
     do
         sleep $TIMEOUT
-        check_ping $CHAN1_IP
+        check_ping $CHAN_IP
         RET=$?
 
         if [ $RET -ne 0 ]; then
@@ -27,10 +44,10 @@ error_state()
         fi
 
         if [ $FAIL_NR -eq $FAILS_TOTAL ]; then
-            if [[ $CHAN1_GPIO ]]; then
-                if [ $CHAN1_FUNC == "RST" ]; then
+            if [[ $CHAN_GPIO ]]; then
+                if [ $CHAN_FUNC == "RST" ]; then
                     echo "[rpi-rig-ping-chan] RPI requests a reset because FAIL_NR = $FAIL_NR at $(date)" >> ${LOGFILE}
-                    reset-chan.sh $CHAN1_GPIO
+                    reset-chan.sh $CHAN_GPIO
                 fi
             fi
             break
@@ -40,7 +57,7 @@ error_state()
 
 while [ 1 ]
 do
-    check_ping $CHAN1_IP
+    check_ping $CHAN_IP
     RET=$?
 
     if [ $RET -ne 0 ]; then

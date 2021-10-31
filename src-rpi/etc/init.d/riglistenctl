@@ -16,24 +16,44 @@ PIDFILE_CHAN1=/var/run/riglisten1.pid
 PIDFILE_CHAN2=/var/run/riglisten2.pid
 PIDFILE_CHAN3=/var/run/riglisten3.pid
 PIDFILE_CHAN4=/var/run/riglisten4.pid
+PIDFILE_CHAN5=/var/run/riglisten5.pid
+PIDFILE_CHAN6=/var/run/riglisten6.pid
+PIDFILE_CHAN7=/var/run/riglisten7.pid
+PIDFILE_CHAN8=/var/run/riglisten8.pid
 
 start()
 {
     echo "Starting riglistenctl service..."
     if [[ $CHAN1_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN1 --exec /usr/bin/rig-listen-chan1.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN1 --exec /usr/bin/rig-listen-chan.sh -- 1
     fi
 
     if [[ $CHAN2_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN2 --exec /usr/bin/rig-listen-chan2.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN2 --exec /usr/bin/rig-listen-chan.sh -- 2
     fi
 
     if [[ $CHAN3_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN3 --exec /usr/bin/rig-listen-chan3.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN3 --exec /usr/bin/rig-listen-chan.sh -- 3
     fi
 
     if [[ $CHAN4_GPIO ]]; then
-        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN4 --exec /usr/bin/rig-listen-chan4.sh
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN4 --exec /usr/bin/rig-listen-chan.sh -- 4
+    fi
+
+    if [[ $CHAN5_GPIO ]]; then
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN5 --exec /usr/bin/rig-listen-chan.sh -- 5
+    fi
+
+    if [[ $CHAN6_GPIO ]]; then
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN6 --exec /usr/bin/rig-listen-chan.sh -- 6
+    fi
+
+    if [[ $CHAN7_GPIO ]]; then
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN7 --exec /usr/bin/rig-listen-chan.sh -- 7
+    fi
+
+    if [[ $CHAN8_GPIO ]]; then
+        start-stop-daemon --start -b --make-pidfile --pidfile $PIDFILE_CHAN8 --exec /usr/bin/rig-listen-chan.sh -- 8
     fi
     echo "Started"
 }
@@ -55,6 +75,22 @@ stop()
 
     if [[ $CHAN4_GPIO ]]; then
         start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN4
+    fi
+
+    if [[ $CHAN5_GPIO ]]; then
+        start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN5
+    fi
+
+    if [[ $CHAN6_GPIO ]]; then
+        start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN6
+    fi
+
+    if [[ $CHAN7_GPIO ]]; then
+        start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN7
+    fi
+
+    if [[ $CHAN8_GPIO ]]; then
+        start-stop-daemon --stop --quiet --oknodo --pidfile $PIDFILE_CHAN8
     fi
     echo "Stopped"
 }

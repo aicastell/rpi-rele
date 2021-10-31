@@ -55,10 +55,12 @@ if [ ! -f /etc/rpi-rele.conf ]; then
 fi
 
 echo "Settings permissions"
+sudo chmod 766 /usr/bin/reles-test.sh
 sudo chmod 766 /usr/bin/reset-chan.sh
-sudo chmod 755 /usr/bin/rig-ping-chan*.sh
-sudo chmod 755 /usr/bin/rig-listen-chan*.sh
+sudo chmod 755 /usr/bin/rig-ping-chan.sh
+sudo chmod 755 /usr/bin/rig-listen-chan.sh
 sudo chmod 755 /etc/init.d/rigpingctl
+sudo chmod 755 /etc/init.d/riglistenctl
 sudo chmod 644 /etc/rpi-rele.conf
 
 echo "Add init service"
